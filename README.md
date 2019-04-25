@@ -58,12 +58,14 @@ This codebase is also meant for research and it is possible to train new models.
 
 1. Generate training data:
    ```
-   ./dump_data -train input.s16 features.f32 data.u8
+   execute the script: prepare_data.sh
+  
    ```
-   where the first file contains 16 kHz 16-bit raw PCM audio (no header) and the other files are output files. This program makes several passes over the data with different filters to generate a large amount of training data.
+   #where the first file contains 16 kHz 16-bit raw PCM audio (no header) and the other files are output files. This program makes several passes over the data with different filters to generate a large amount of training data.
 
 1. Now that you have your files, train with:
    ```
+   script:train.py
    ./src/train_lpcnet.py features.f32 data.u8
    ```
    and it will generate an lpcnet*.h5 file for each iteration. If it stops with a
@@ -71,7 +73,8 @@ This codebase is also meant for research and it is possible to train new models.
 
 1. You can synthesise speech with Python and your GPU card:
    ```
-   ./dump_data -test test_input.s16 test_features.f32
+   #./dump_data -test test_input.s16 test_features.f32
+   After the script prepare_data.sh the test features had been generated.
    ./src/test_lpcnet.py test_features.f32 test.s16
    ```
    Note the .h5 is hard coded in test_lpcnet.py, modify for your .h5 file.
@@ -80,9 +83,10 @@ This codebase is also meant for research and it is possible to train new models.
    First extract the model files nnet_data.h and nnet_data.c
    ```
    ./dump_lpcnet.py lpcnet15_384_10_G16_64.h5
+   ./generate.sh
    ```
-   and move the generated nnet_data.* files to the src/ directory.
-   Then you just need to rebuild the software and use lpcnet_demo as explained above.
+   
+   #Then you just need to rebuild the software and use lpcnet_demo as explained above.
 
 # Speech Material for Training 
 
