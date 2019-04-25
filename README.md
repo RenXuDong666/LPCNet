@@ -59,14 +59,13 @@ This codebase is also meant for research and it is possible to train new models.
 1. Generate training data:
    ```
    execute the script: prepare_data.sh
-  
    ```
    #where the first file contains 16 kHz 16-bit raw PCM audio (no header) and the other files are output files. This program makes several passes over the data with different filters to generate a large amount of training data.
 
 1. Now that you have your files, train with:
    ```
-   script:train.py
-   ./src/train_lpcnet.py features.f32 data.u8
+   python train.py
+   or ./src/train_lpcnet.py features.f32 data.u8
    ```
    and it will generate an lpcnet*.h5 file for each iteration. If it stops with a
    "Failed to allocate RNN reserve space" message try reducing the *batch\_size* variable in train_lpcnet.py.
